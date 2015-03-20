@@ -11,6 +11,7 @@ ButtonsManager::ButtonsManager(QWidget *parent)
     {
         QToolButton* newButton = new QToolButton;
         newButton->setText("X" + QString::number(iter+1));
+        newButton->setCheckable(true);
         newButton->setMinimumHeight(40);
         newButton->setMinimumWidth(40);
         m_buttons.append(newButton);
@@ -37,14 +38,9 @@ QList<int> ButtonsManager::pressedButtons() const
     return buttonsPressed;
 }
 
-void ButtonsManager::buttonClicked()
+void ButtonsManager::buttonClicked() const
 {
-    QToolButton* clickedButton = qobject_cast<QToolButton*>(sender());
-
-    if(clickedButton->isChecked())
-        clickedButton->setCheckable(false);
-    else
-        clickedButton->setCheckable(true);
+    emit buttonsStatusChanged();
 }
 
 ButtonsManager::~ButtonsManager()

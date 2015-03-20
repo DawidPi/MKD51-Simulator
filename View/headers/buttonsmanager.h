@@ -14,8 +14,11 @@ public:
 
     QList<int> pressedButtons() const;
 
+signals:
+    void buttonsStatusChanged() const;
+
 protected slots:
-    void buttonClicked();
+    void buttonClicked() const;
 
 private: //fields
     static const int m_buttonsNr=4;
