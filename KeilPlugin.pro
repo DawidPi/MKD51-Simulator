@@ -25,6 +25,7 @@ SOURCES += main.cpp\
         View/sources/wled.cpp\
         View/sources/mainview.cpp \
         View/sources/procview.cpp \
+        View/sources/l8diode.cpp \
 
 HEADERS  += View/headers/buttonsmanager.h\
         View/headers/diode.h\
@@ -36,3 +37,4 @@ HEADERS  += View/headers/buttonsmanager.h\
         View/headers/wled.h\
         View/headers/mainview.h \
         View/headers/procview.h \
+        View/headers/l8diode.h \
