@@ -69,13 +69,13 @@ void Buzzer::drawMusic(QPainter& speakerPainter)
         speakerPainter.setPen(arcPen);
         speakerPainter.drawArc(0.30*m_width, m_startOffset,
                                0.5*m_width, m_height,
-                               -55*16, 110*16);
+                               -30*16, 60*16);
 
         arcPen.setColor(Qt::green);
         speakerPainter.setPen(arcPen);
         speakerPainter.drawArc(0.43*m_width, m_startOffset,
                            0.5*m_width, m_height,
-                           -55*16, 110*16);
+                           -42*16, 84*16);
 
         arcPen.setColor(Qt::magenta);
         speakerPainter.setPen(arcPen);
