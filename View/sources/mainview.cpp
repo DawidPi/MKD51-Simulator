@@ -2,6 +2,7 @@
 
 #include <QVBoxLayout>
 #include <QGroupBox>
+#include <QDebug>
 
 MainView::MainView(QWidget *parent) :
     QWidget(parent)
@@ -26,10 +27,14 @@ MainView::MainView(QWidget *parent) :
 
 void MainView::createBuzzAndL8Diode(QLayout* layout)
 {
-    QVBoxLayout* elementsLayout = new QVBoxLayout;
-    QGroupBox* box = new QGroupBox(tr("out: Diode P1.6 out: Buzz P1.7"));
+    QHBoxLayout* elementsLayout = new QHBoxLayout;
+    QGroupBox* box = new QGroupBox(tr("out: Buzz P1.7, out: Diode P1.6"));
 
-    L8Diode* diode = new L8Diode;
+    Diode* diode = new Diode(0,Qt::blue,false,2);
+    Buzzer* buzz = new Buzzer;
+    buzz->changeStatus(false);
+
+    elementsLayout->addWidget(buzz);
     elementsLayout->addWidget(diode);
 
     box->setLayout(elementsLayout);

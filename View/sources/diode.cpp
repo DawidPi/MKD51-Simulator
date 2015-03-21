@@ -9,15 +9,15 @@ Diode::Diode(QWidget *parent, QColor color, bool status, double scale) :
     m_color = color;
     m_status = status;
     m_scale = scale;
-    setFixedSize(11*m_scale,11*m_scale);
+    setFixedSize(15*m_scale,15*m_scale);
 }
 
-void Diode::paintEvent(QPaintEvent *event)
+void Diode::paintEvent(QPaintEvent* event)
 {
     QPainter diodePainter(this);
     QPen     diodePen(m_color);
     diodePen.setWidth(2);
-
+    diodePainter.setRenderHint(QPainter::Antialiasing);
 
     diodePainter.setPen(diodePen);
 
@@ -28,5 +28,5 @@ void Diode::paintEvent(QPaintEvent *event)
         diodePainter.setBrush(diodeBrush);
     }
 
-    diodePainter.drawEllipse(0,0,10*m_scale,10*m_scale);
+    diodePainter.drawEllipse(3,3,10*m_scale,10*m_scale);
 }

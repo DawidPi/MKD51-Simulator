@@ -8,7 +8,9 @@
 #include "procview.h"
 #include "potmanager.h"
 #include "wled.h"
+#include "diode.h"
 #include "l8diode.h"
+#include "buzzer.h"
 
 class MainView : public QWidget
 {

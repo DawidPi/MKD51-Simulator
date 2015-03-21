@@ -12,7 +12,7 @@ public:
     explicit Diode(QWidget *parent, QColor color, bool status=false, double scale=1);
 
 protected:
-    void paintEvent(QPaintEvent * event);
+    void paintEvent(QPaintEvent *event);
 
 signals:
 
