@@ -32,7 +32,7 @@ void MainView::createBuzzAndL8Diode(QLayout* layout)
 
     Diode* diode = new Diode(0,Qt::blue,false,2);
     Buzzer* buzz = new Buzzer;
-    buzz->changeStatus(false);
+    buzz->changeStatus(true);
 
     elementsLayout->addWidget(buzz);
     elementsLayout->addWidget(diode);
@@ -102,18 +102,6 @@ void MainView::createPotentiometers(QLayout* layout)
 
     PotManager* potentiometers = new PotManager;
     tmpLayout->addWidget(potentiometers);
-
-    box->setLayout(tmpLayout);
-    layout->addWidget(box);
-}
-
-void MainView::createL8Diode(QLayout* layout)
-{
-    QHBoxLayout* tmpLayout = new QHBoxLayout;
-    QGroupBox* box = new QGroupBox(tr("L8 Diode (out: P1.6)"));
-
-    L8Diode* diode = new L8Diode;
-    tmpLayout->addWidget(diode);
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);

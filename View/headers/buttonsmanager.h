@@ -21,7 +21,7 @@ protected slots:
     void buttonClicked() const;
 
 private: //fields
-    static const int m_buttonsNr=4;
+    static const int m_buttonsNr=8;
     QList<QToolButton*> m_buttons;
 
 };

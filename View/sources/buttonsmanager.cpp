@@ -10,7 +10,7 @@ ButtonsManager::ButtonsManager(QWidget *parent)
     for(int iter=0; iter<m_buttonsNr; iter++)
     {
         QToolButton* newButton = new QToolButton;
-        newButton->setText("X" + QString::number(iter+1));
+        newButton->setText("X" + QString::number(iter));
         newButton->setCheckable(true);
         newButton->setMinimumHeight(40);
         newButton->setMinimumWidth(40);
