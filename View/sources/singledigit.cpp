@@ -8,6 +8,8 @@
 #include <QPainterPath>
 #include <QDebug>
 
+namespace View {
+
 SingleDigit::SingleDigit(QWidget *parent,int borderWidth, QColor borderColor, QColor segmentColor,double scale) :
     QWidget(parent)
 {
@@ -218,4 +220,6 @@ void SingleDigit::drawHorizontalSegment(QPainter &painter, const QPointF& startP
         painter.fillPath(segmentPath,brush);
     else
         painter.drawPath(segmentPath);
+}
+
 }

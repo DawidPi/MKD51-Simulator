@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QToolButton>
 
+namespace View {
+
 class ButtonsManager : public QWidget
 {
     Q_OBJECT
@@ -25,5 +27,6 @@ private: //fields
     QList<QToolButton*> m_buttons;
 
 };
+}
 
 #endif // BUTTONSMANAGER_H

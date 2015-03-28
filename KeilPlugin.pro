@@ -22,10 +22,10 @@ SOURCES += main.cpp\
         View/sources/keyboardmanager.cpp\
         View/sources/potmanager.cpp\
         View/sources/singledigit.cpp\
-        View/sources/wled.cpp\
         View/sources/mainview.cpp \
         View/sources/procview.cpp \
         View/sources/buzzer.cpp \
+    View/sources/ledmanager.cpp
 
 HEADERS  += View/headers/buttonsmanager.h\
         View/headers/diode.h\
@@ -34,7 +34,7 @@ HEADERS  += View/headers/buttonsmanager.h\
         View/headers/keyboardmanager.h\
         View/headers/potmanager.h\
         View/headers/singledigit.h\
-        View/headers/wled.h\
         View/headers/mainview.h \
         View/headers/procview.h \
         View/headers/buzzer.h \
+    View/headers/ledmanager.h

@@ -4,6 +4,8 @@
 #include <QGroupBox>
 #include <QDebug>
 
+namespace View {
+
 MainView::MainView(QWidget *parent) :
     QWidget(parent)
 {
@@ -76,7 +78,7 @@ void MainView::createSegmView(QLayout* layout)
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("7 segm display (addr:0x8018)"));
 
-    WLed* segmDisplay = new WLed;
+    LedManager* segmDisplay = new LedManager;
     tmpLayout->addWidget(segmDisplay);
 
     box->setLayout(tmpLayout);
@@ -105,4 +107,6 @@ void MainView::createPotentiometers(QLayout* layout)
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);
+}
+
 }

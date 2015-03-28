@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QSlider>
 
+namespace View{
+
 class PotManager : public QWidget
 {
     Q_OBJECT
@@ -23,5 +25,6 @@ private:
     QVector<QSlider*> m_sliders;
     static const int m_pots=3;
 };
+}
 
 #endif // POTMANAGER_H

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
                         "padding: 0 3px 0 3px;"
                         "}"
                         );
-    MainView view;
+    View::MainView view;
     view.show();
 
     return app.exec();

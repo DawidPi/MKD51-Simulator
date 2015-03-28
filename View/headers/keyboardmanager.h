@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "keyboardbutton.h"
 
+namespace View {
 
 class KeyboardManager : public QWidget
 {
@@ -26,5 +27,5 @@ QVector<KeyboardButton*> m_buttons;
 private: //Methods
     void createButtons();
 };
-
+}
 #endif // KEYBOARDWINDOW_H

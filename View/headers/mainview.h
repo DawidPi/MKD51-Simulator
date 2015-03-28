@@ -7,9 +7,11 @@
 #include "keyboardmanager.h"
 #include "procview.h"
 #include "potmanager.h"
-#include "wled.h"
+#include "ledmanager.h"
 #include "diode.h"
 #include "buzzer.h"
+
+namespace View{
 
 class MainView : public QWidget
 {
@@ -27,5 +29,7 @@ private:
     void createPotentiometers(QLayout* layout);
     void createBuzzAndL8Diode(QLayout* layout);
 };
+
+}
 
 #endif

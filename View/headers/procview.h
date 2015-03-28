@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+namespace View{
+
 class ProcView : public QWidget
 {
     Q_OBJECT
@@ -36,5 +38,6 @@ private: // methods
                        bool upper);
 
 };
+}
 
 #endif // PROCVIEW_H

@@ -3,6 +3,8 @@
 
 #include <QToolButton>
 
+namespace View {
+
 class KeyboardButton : public QToolButton
 {
     Q_OBJECT
@@ -23,5 +25,7 @@ private: //Methods
 private: //Fields
     Value m_value;
 };
+
+}
 
 #endif // BUTTON_H

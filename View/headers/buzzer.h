@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+namespace View{
+
 class Buzzer : public QWidget
 {
     Q_OBJECT
@@ -27,5 +29,7 @@ private:
     void drawMusic(QPainter& speakerPainter);
 
 };
+
+}
 
 #endif

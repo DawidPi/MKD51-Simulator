@@ -3,6 +3,8 @@
 #include <QPen>
 #include <QBrush>
 
+namespace View {
+
 Diode::Diode(QWidget *parent, QColor color, bool status, double scale) :
     QWidget(parent)
 {
@@ -29,4 +31,6 @@ void Diode::paintEvent(QPaintEvent* event)
     }
 
     diodePainter.drawEllipse(3,3,10*m_scale,10*m_scale);
+}
+
 }

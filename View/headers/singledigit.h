@@ -7,6 +7,8 @@
 #include <QPoint>
 #include <QPointF>
 
+namespace View{
+
 class SingleDigit : public QWidget
 {
     Q_OBJECT
@@ -62,5 +64,7 @@ private: //fields
     QColor m_borderColor;
     std::array<bool, ELEMENTS> m_states;
 };
+
+}
 
 #endif // SINGLEDIGIT_H

@@ -4,13 +4,15 @@
 #include <QWidget>
 #include "singledigit.h"
 
-class WLed : public QWidget
+namespace View{
+
+class LedManager : public QWidget
 {
     Q_OBJECT
 
 public:
-    WLed(QWidget *parent = 0);
-    ~WLed();
+    LedManager(QWidget *parent = 0);
+    ~LedManager();
 
 public slots:
     void changeSegment(int letterOffset,
@@ -20,5 +22,7 @@ public slots:
 private: //fields
     QVector<SingleDigit*> m_digits;
 };
+
+}
 
 #endif // WLED_H

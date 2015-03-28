@@ -1,6 +1,7 @@
 #include "../headers/buttonsmanager.h"
 #include <QHBoxLayout>
 
+namespace View{
 
 ButtonsManager::ButtonsManager(QWidget *parent)
     : QWidget(parent)
@@ -45,5 +46,7 @@ void ButtonsManager::buttonClicked() const
 
 ButtonsManager::~ButtonsManager()
 {
+
+}
 
 }

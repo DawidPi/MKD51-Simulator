@@ -2,6 +2,8 @@
 #include <QGridLayout>
 #include "../headers/keyboardbutton.h"
 
+namespace View {
+
 KeyboardManager::KeyboardManager(QWidget *parent) :
     QWidget(parent)
 {
@@ -43,4 +45,6 @@ void KeyboardManager::buttonChanged(bool newValue)
 
 KeyboardManager::~KeyboardManager()
 {
+}
+
 }

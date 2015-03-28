@@ -2,6 +2,8 @@
 #include "../headers/diode.h"
 #include <QHBoxLayout>
 
+namespace View{
+
 DiodeManager::DiodeManager(QWidget *parent)
     : QWidget(parent)
 {
@@ -47,5 +49,7 @@ void DiodeManager::changeDiodesState(u_int8_t newDiodesStatus)
 
 DiodeManager::~DiodeManager()
 {
+
+}
 
 }

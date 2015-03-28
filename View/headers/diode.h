@@ -5,6 +5,8 @@
 #include <QPaintEvent>
 #include <QColor>
 
+namespace View{
+
 class Diode : public QWidget
 {
     Q_OBJECT
@@ -24,5 +26,6 @@ private: //fields
     QColor m_color;
     double m_scale;
 };
+}
 
 #endif // DIODE_H

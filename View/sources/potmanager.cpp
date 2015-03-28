@@ -3,6 +3,8 @@
 #include <QSlider>
 #include <QString>
 
+namespace View {
+
 PotManager::PotManager(QWidget *parent)
     : QWidget(parent)
 {
@@ -42,5 +44,7 @@ void PotManager::sliderChanged(int newValue)
 
 PotManager::~PotManager()
 {
+
+}
 
 }

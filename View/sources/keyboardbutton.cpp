@@ -1,6 +1,8 @@
 #include <QString>
 #include "../headers/keyboardbutton.h"
 
+namespace View{
+
 KeyboardButton::KeyboardButton(QWidget *parent, Value buttonValue) :
     QToolButton(parent)
 {
@@ -18,4 +20,6 @@ KeyboardButton::KeyboardButton(QWidget *parent, Value buttonValue) :
     // just to look nice
     setMinimumWidth(40);
     setMinimumHeight(40);
+}
+
 }

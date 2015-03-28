@@ -4,6 +4,8 @@
 
 //needs some refactoring
 
+namespace View {
+
 ProcView::ProcView(QWidget *parent) :
     QWidget(parent)
 {
@@ -110,4 +112,6 @@ void ProcView::addPinToPath(QPainterPath& pinPath, QPointF& currentPoint,
     nextPoint = currentPoint + QPointF(m_elementaryLength*m_noPinRatio,0);
     pinPath.moveTo(nextPoint);
     currentPoint = nextPoint;
+}
+
 }

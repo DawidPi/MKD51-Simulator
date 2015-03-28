@@ -6,6 +6,8 @@
 #include <exception>
 #include "diode.h"
 
+namespace View{
+
 class DiodeManager : public QWidget
 {
     Q_OBJECT
@@ -25,5 +27,7 @@ private:
 
 private: //methods
 };
+
+}
 
 #endif // DIODEMANAGER_H

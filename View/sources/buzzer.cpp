@@ -4,6 +4,8 @@
 #include <QPen>
 #include <QPainterPath>
 
+namespace View {
+
 Buzzer::Buzzer(QWidget *parent,bool defaultOn ,double scale) :
     QWidget(parent)
 {
@@ -97,4 +99,5 @@ void Buzzer::drawMusic(QPainter& speakerPainter)
                                 m_startOffset,
                                 m_height+m_startOffset);
     }
+}
 }

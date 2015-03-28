@@ -1,8 +1,10 @@
-#include "../headers/wled.h"
+#include "../headers/ledmanager.h"
 #include "QGridLayout"
 #include <qdebug.h>
 
-WLed::WLed(QWidget *parent)
+namespace View {
+
+LedManager::LedManager(QWidget *parent)
     : QWidget(parent)
 {
 
@@ -18,7 +20,7 @@ WLed::WLed(QWidget *parent)
     setLayout(gridLayout);
 }
 
-void WLed::changeSegment(int letterOffset,
+void LedManager::changeSegment(int letterOffset,
                          QVector<SingleDigit::Segment> segments,
                          bool newState)
 {
@@ -28,6 +30,8 @@ void WLed::changeSegment(int letterOffset,
     }
 }
 
-WLed::~WLed()
+LedManager::~LedManager()
 {
+}
+
 }
