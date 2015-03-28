@@ -5,30 +5,30 @@
 
 namespace View{
 
-class Buzzer : public QWidget
-{
-    Q_OBJECT
+    class Buzzer : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    explicit Buzzer(QWidget* parent=0,bool defaultOn=true,
-                    double scale=1);
+    public:
+        explicit Buzzer(QWidget* parent=0,bool defaultOn=false,
+                        double scale=1);
 
-protected:
-    void paintEvent(QPaintEvent* event);
+    public slots:
+        void changeStatus(bool turnedOn);
 
-public slots:
-    void changeStatus(bool turnedOn);
+    protected:
+        void paintEvent(QPaintEvent* event);
 
-private:
-    bool m_turnedOn;
-    int m_startOffset = 5;
-    double m_width=80;
-    double m_height=80;
+    private:
+        bool m_turnedOn;
+        int m_startOffset = 5;
+        double m_width=80;
+        double m_height=80;
 
-    void drawSpeaker(QPainter& speakerPainter);
-    void drawMusic(QPainter& speakerPainter);
+        void drawSpeaker(QPainter& speakerPainter);
+        void drawMusic(QPainter& speakerPainter);
 
-};
+    };
 
 }
 

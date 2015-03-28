@@ -6,27 +6,27 @@
 
 namespace View {
 
-class ButtonsManager : public QWidget
-{
-    Q_OBJECT
+    class ButtonsManager : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    ButtonsManager(QWidget *parent = 0);
-    ~ButtonsManager();
+    public:
+        ButtonsManager(QWidget *parent = 0);
+        ~ButtonsManager();
 
-    QList<int> pressedButtons() const;
+        QList<int> pressedButtons() const;
 
-signals:
-    void buttonsStatusChanged() const;
+    signals:
+        void buttonsStatusChanged() const;
 
-protected slots:
-    void buttonClicked() const;
+    protected slots:
+        void buttonClicked() const;
 
-private: //fields
-    static const int m_buttonsNr=8;
-    QList<QToolButton*> m_buttons;
+    private: //fields
+        static const int m_buttonsNr=6;
+        QList<QToolButton*> m_buttons;
 
-};
+    };
 }
 
 #endif // BUTTONSMANAGER_H

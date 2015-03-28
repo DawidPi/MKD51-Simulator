@@ -6,22 +6,21 @@
 
 namespace View{
 
-class LedManager : public QWidget
-{
-    Q_OBJECT
+    class LedManager : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    LedManager(QWidget *parent = 0);
-    ~LedManager();
+    public:
+        LedManager(QWidget *parent = 0);
+        ~LedManager();
 
-public slots:
-    void changeSegment(int letterOffset,
-                       QVector<SingleDigit::Segment> segments,
-                       bool newState);
+        void changeSegment(int letterOffset,
+                           QVector<SingleDigit::Segment> segments,
+                           bool newState);
 
-private: //fields
-    QVector<SingleDigit*> m_digits;
-};
+    private: //fields
+        QVector<SingleDigit*> m_digits;
+    };
 
 }
 

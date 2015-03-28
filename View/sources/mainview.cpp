@@ -32,12 +32,11 @@ void MainView::createBuzzAndL8Diode(QLayout* layout)
     QHBoxLayout* elementsLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("out: Buzz P1.7, out: Diode P1.6"));
 
-    Diode* diode = new Diode(0,Qt::blue,false,2);
-    Buzzer* buzz = new Buzzer;
-    buzz->changeStatus(true);
+    m_diodeL8 = new Diode(0,Qt::blue,false,2);
+    m_buzzer = new Buzzer;
 
-    elementsLayout->addWidget(buzz);
-    elementsLayout->addWidget(diode);
+    elementsLayout->addWidget(m_buzzer);
+    elementsLayout->addWidget(m_diodeL8);
 
     box->setLayout(elementsLayout);
     layout->addWidget(box);
@@ -48,8 +47,8 @@ void MainView::createButtons(QLayout* layout)
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("buttons (addr:0x8008)"));
 
-    ButtonsManager* buttons = new ButtonsManager;
-    tmpLayout->addWidget(buttons);
+    m_buttons = new ButtonsManager;
+    tmpLayout->addWidget(m_buttons);
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);
@@ -60,8 +59,8 @@ void MainView::createDiodes(QLayout* layout)
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("diodes (addr:0x8008)"));
 
-    DiodeManager* diodes = new DiodeManager;
-    tmpLayout->addWidget(diodes);
+    m_diodes = new DiodeManager;
+    tmpLayout->addWidget(m_diodes);
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);
@@ -78,8 +77,8 @@ void MainView::createSegmView(QLayout* layout)
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("7 segm display (addr:0x8018)"));
 
-    LedManager* segmDisplay = new LedManager;
-    tmpLayout->addWidget(segmDisplay);
+    m_ledDisplay = new LedManager;
+    tmpLayout->addWidget(m_ledDisplay);
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);
@@ -90,8 +89,8 @@ void MainView::createKeyboard(QLayout* layout)
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("keyboard (out:P0,1 in:P2,5)"));
 
-    KeyboardManager* keyboard = new KeyboardManager;
-    tmpLayout->addWidget(keyboard);
+    m_keyboard = new KeyboardManager;
+    tmpLayout->addWidget(m_keyboard);
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);
@@ -102,8 +101,8 @@ void MainView::createPotentiometers(QLayout* layout)
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("Potentiometers (addr: 8005-7)"));
 
-    PotManager* potentiometers = new PotManager;
-    tmpLayout->addWidget(potentiometers);
+    m_potentiometers = new PotManager;
+    tmpLayout->addWidget(m_potentiometers);
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);

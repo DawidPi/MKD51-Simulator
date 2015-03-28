@@ -6,25 +6,25 @@
 
 namespace View{
 
-class PotManager : public QWidget
-{
-    Q_OBJECT
+    class PotManager : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    PotManager(QWidget *parent = 0);
-    ~PotManager();
+    public:
+        PotManager(QWidget *parent = 0);
+        ~PotManager();
 
-signals:
-    void potResistanceChanged(int potOffset, double newResistance);
+    signals:
+        void potResistanceChanged(int potOffset, double newResistance);
 
-private slots:
-    void sliderChanged(int newValue);
+    private slots:
+        void sliderChanged(int newValue);
 
-private:
-    double m_potMaxVoltage=5;
-    QVector<QSlider*> m_sliders;
-    static const int m_pots=3;
-};
+    private:
+        double m_potMaxVoltage=5;
+        QVector<QSlider*> m_sliders;
+        static const int m_pots=3;
+    };
 }
 
 #endif // POTMANAGER_H

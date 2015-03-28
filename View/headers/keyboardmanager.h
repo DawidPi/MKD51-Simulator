@@ -6,26 +6,26 @@
 
 namespace View {
 
-class KeyboardManager : public QWidget
-{
-    Q_OBJECT
+    class KeyboardManager : public QWidget
+    {
+        Q_OBJECT
 
-public:
-    explicit KeyboardManager(QWidget *parent = 0);
-    ~KeyboardManager();
+    public:
+        explicit KeyboardManager(QWidget *parent = 0);
+        ~KeyboardManager();
 
-signals:
-    void buttonPressed(KeyboardButton::Value Button);
-    void buttonReleased(KeyboardButton::Value Button);
+    signals:
+        void buttonPressed(KeyboardButton::Value Button);
+        void buttonReleased(KeyboardButton::Value Button);
 
-private slots:
-    void buttonChanged(bool newValue);
+    private slots:
+        void buttonChanged(bool newValue);
 
-private: //fields
-QVector<KeyboardButton*> m_buttons;
+    private: //fields
+    QVector<KeyboardButton*> m_buttons;
 
-private: //Methods
-    void createButtons();
-};
+    private: //Methods
+        void createButtons();
+    };
 }
 #endif // KEYBOARDWINDOW_H
