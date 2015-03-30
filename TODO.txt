@@ -1,0 +1,4 @@
+-> implement main Controller
+-> You can implement Model(Connector) or think about it
+-> implement RESET for plugin
+-> HAVE FUN!
