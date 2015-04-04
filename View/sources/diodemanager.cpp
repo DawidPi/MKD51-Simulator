@@ -11,14 +11,14 @@ DiodeManager::DiodeManager(QWidget *parent)
 
     for(int iter=0; iter<m_redDiodes; iter++)
     {
-        Diode* newDiode= new Diode(0,Qt::red, true,2);
+        Diode* newDiode= new Diode(0,Qt::red, false,2);
         diodesLayout->addWidget(newDiode);
         m_diodes.append(newDiode);
     }
 
     for(int iter=0; iter<m_yellowDiodes; iter++)
     {
-        Diode* newDiode = new Diode(0,Qt::yellow, true, 2);
+        Diode* newDiode = new Diode(0,Qt::yellow, false, 2);
         diodesLayout->addWidget(newDiode);
         m_diodes.append(newDiode);
     }
