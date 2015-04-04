@@ -41,7 +41,7 @@ namespace View{
         enum {POSITION=0, ORIENTATION, SEGMENT};
 
         enum {isVertical=1, isHorizontal=0};
-        static constexpr int ELEMENTS=static_cast<int>(Segment::SEG_MAX);
+        static const int ELEMENTS=static_cast<int>(Segment::SEG_MAX);
 
 
     private: // Methods

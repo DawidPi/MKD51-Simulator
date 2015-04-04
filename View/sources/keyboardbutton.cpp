@@ -7,7 +7,7 @@ KeyboardButton::KeyboardButton(QWidget *parent, Value buttonValue) :
     QToolButton(parent)
 {
     //0 and 9 are lowest and max digits
-    if(static_cast<int>(buttonValue) >= 0 and static_cast<int>(buttonValue) <=9)
+    if(static_cast<int>(buttonValue) >= 0 && static_cast<int>(buttonValue) <=9)
         setText(QString::number(static_cast<int>(buttonValue)));
     else if(buttonValue == Value::BUTT_MIN)
         setText("-");

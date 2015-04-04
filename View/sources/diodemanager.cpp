@@ -34,7 +34,7 @@ void DiodeManager::changeDiodesState(int diodeOffset, bool newStatus)
     m_diodes.at(diodeOffset)->setStatus(newStatus);
 }
 
-void DiodeManager::changeDiodesState(u_int8_t newDiodesStatus)
+void DiodeManager::changeDiodesState(uint8_t newDiodesStatus)
 {
     const int bitsInByte=8;
     for(int currentOffset=0; currentOffset<bitsInByte; currentOffset++)

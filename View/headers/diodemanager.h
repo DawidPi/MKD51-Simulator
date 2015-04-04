@@ -17,7 +17,7 @@ namespace View{
         ~DiodeManager();
 
     void changeDiodesState(int diodeOffset, bool newStatus);
-    void changeDiodesState(u_int8_t newDiodesStatus);
+    void changeDiodesState(uint8_t newDiodesStatus);
 
     private:
         QVector<Diode*> m_diodes;
