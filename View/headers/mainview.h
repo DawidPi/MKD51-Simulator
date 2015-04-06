@@ -20,7 +20,6 @@ namespace View{
     public:
         explicit MainView(QWidget* parent =0);
 
-    public:
         Diode&              singleDiode(){return *m_diodeL8;}
         Buzzer&             buzzer(){return *m_buzzer;}
         DiodeManager&       diodes(){return *m_diodes;}

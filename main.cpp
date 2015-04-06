@@ -1,9 +1,11 @@
 #include <QApplication>
 #include "View/headers/mainview.h"
+#include <thread>
 
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
+
+void main1(int m_argc, char** m_argv) {
+    View::MainView* m_view;
+    QApplication App(m_argc, m_argv);
     qApp->setStyleSheet("QGroupBox {"
                         "border: 1px solid gray;"
                         "border-radius: 3px;"
@@ -16,8 +18,17 @@ int main(int argc, char *argv[])
                         "padding: 0 3px 0 3px;"
                         "}"
                         );
-    View::MainView view;
-    view.show();
 
-    return app.exec();
+    m_view = new View::MainView;
+    m_view->show();
+
+    App.exec();
+}
+
+int main(int argc, char *argv[])
+{
+    std::thread gui(main1,argc,argv);
+    gui.join();
+
+    return 0;
 }
