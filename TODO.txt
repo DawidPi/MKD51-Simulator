@@ -1,3 +1,5 @@
+!! -> make appropriate signals and slots from View to the Controller <- !!
+
 -> implement main Controller
 -> You can implement Model(Connector) or think about it
 -> implement RESET for plugin

@@ -45,7 +45,7 @@ void MainView::createBuzzAndL8Diode(QLayout* layout)
 void MainView::createButtons(QLayout* layout)
 {
     QHBoxLayout* tmpLayout = new QHBoxLayout;
-    QGroupBox* box = new QGroupBox(tr("buttons (addr:0x8008)"));
+    QGroupBox* box = new QGroupBox(tr("buttons (addr:0x8009)"));
 
     m_buttons = new ButtonsManager;
     tmpLayout->addWidget(m_buttons);

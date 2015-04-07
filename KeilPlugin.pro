@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+QMAKE_CXXFLAGS += -std=c++11
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WLedPlugin
@@ -23,7 +25,9 @@ SOURCES += main.cpp\
         View/sources/mainview.cpp \
         View/sources/procview.cpp \
         View/sources/buzzer.cpp \
-        View/sources/ledmanager.cpp
+        View/sources/ledmanager.cpp \
+        Controller/sources/simulator.cpp \
+        Controller/sources/guistart.cpp
 
 HEADERS  += View/headers/buttonsmanager.h\
         View/headers/diode.h\
@@ -35,4 +39,6 @@ HEADERS  += View/headers/buttonsmanager.h\
         View/headers/mainview.h \
         View/headers/procview.h \
         View/headers/buzzer.h \
-        View/headers/ledmanager.h
+        View/headers/ledmanager.h \
+        Controller/headers/simulator.h \
+        Controller/headers/guistart.h
