@@ -7,6 +7,8 @@ namespace View{
 DiodeManager::DiodeManager(QWidget *parent)
     : QWidget(parent)
 {
+    qRegisterMetaType<uint16_t>("uint16_t");
+    qRegisterMetaType<uint8_t>("uint8_t");
     QHBoxLayout* diodesLayout= new QHBoxLayout;
 
     for(int iter=0; iter<m_redDiodes; iter++)

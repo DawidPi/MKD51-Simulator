@@ -7,12 +7,14 @@ namespace View {
 LedManager::LedManager(QWidget *parent)
     : QWidget(parent)
 {
-
     QGridLayout * gridLayout = new QGridLayout;
 
-    for(int i=0; i<4; i++){
+    m_digits.reserve(m_digitsMax);
+    m_digits.fill(nullptr,m_digitsMax);
+
+    for(int i=0; i<m_digitsMax; i++){
         SingleDigit *newDigit = new SingleDigit;
-        m_digits.append(newDigit);
+        m_digits.replace(m_digitsMax-i-1,newDigit);
 
         gridLayout->addWidget(newDigit,0,i);
     }

@@ -1,5 +1,4 @@
 #include "../headers/guistart.h"
-#include <QDebug>
 #include <QApplication>
 
 namespace Controller {

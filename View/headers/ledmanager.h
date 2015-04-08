@@ -20,6 +20,7 @@ namespace View{
         void reset();
 
     private: //fields
+        static const int m_digitsMax = 4;
         QVector<SingleDigit*> m_digits;
     };
 

@@ -9,6 +9,8 @@ namespace View {
 MainView::MainView(QWidget *parent) :
     QWidget(parent)
 {
+    qRegisterMetaType<uint16_t>("uint16_t");
+    qRegisterMetaType<uint8_t>("uint8_t");
     QVBoxLayout* mainLayout = new QVBoxLayout;
 
     createPinView(mainLayout);
@@ -121,17 +123,17 @@ void MainView::makeConnections() {
 }
 
 void MainView::buttonsUpdated(uint8_t newValues) {
-     qDebug() << "buttons updated: " << newValues;
+
      emit buttonsChanged(newValues);
 }
 
 void MainView::keyboardUpdated(uint16_t newValues) {
-    qDebug() << "keyboard Updated: " << newValues;
+
     emit keyboardChanged(newValues);
 }
 
 void MainView::potentiometersUpdated(int which, double newVoltage) {
-    qDebug() << "potentiometer: " << which << "\n | volatge: " << newVoltage;
+
     emit potentiometersChanged(which, newVoltage);
 }
 
@@ -147,6 +149,7 @@ void MainView::segmentUpdate(int letterOffset
                              bool newState)
 {
     QVector<SingleDigit::Segment> singleDigitVector;
+    singleDigitVector << segment;
     m_ledDisplay->changeSegment(letterOffset, singleDigitVector,
                                 newState);
 }

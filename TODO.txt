@@ -1,3 +1,2 @@
--> test View and Controller
 -> implement Model(Connector)
 -> HAVE FUN!
