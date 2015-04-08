@@ -13,7 +13,7 @@ namespace View{
     public:
         explicit Diode(QWidget *parent, QColor color, bool status=false, double scale=1);
 
-        void setStatus(bool newStatus){m_status = newStatus; update();}
+        void changeStatus(bool newStatus){m_status = newStatus; update();}
 
     protected:
         void paintEvent(QPaintEvent *event);

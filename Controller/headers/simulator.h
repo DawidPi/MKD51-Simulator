@@ -28,17 +28,18 @@ namespace Controller {
         void potentiometers(std::function<void(int which, double fillPercent)>
                            callback);
 
-        std::thread* m_thread;
+        std::thread* m_thread; //to be deleted in final state
 
     public slots:
-        void buttonsUpdate(uint8_t newValue);
-        void keyboardUpdate(uint16_t newValue);
-        void potentiometerUpdate(int which, double fillPercent);
+        void buttonsUpdated(uint8_t newValue);
+        void keyboardUpdated(uint16_t newValue);
+        void potentiometerUpdated(int which, double fillPercent);
 
     signals:
         void segmentChange(int letterOffset, View::SingleDigit::Segment segment,
                            bool newState);
         void diodesChange(int diode, bool newState);
+        void diodesChange(uint8_t newValues);
         void buzzerChange(bool newState);
         void diodeL8Change(bool newState);
 

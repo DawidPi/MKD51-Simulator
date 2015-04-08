@@ -19,9 +19,7 @@ Simulator& Simulator::simulator() {
 
 void Simulator::startGui() {
 
-    qDebug() << "in startGui";
     m_thread = new std::thread(m_guiStartFunctor);
-    qDebug() << "after creating thread";
 
     /*
     QObject::connect();
@@ -68,15 +66,15 @@ void Simulator::potentiometers(std::function<void (int, double)> callback) {
     m_potentiometersCallback = callback;
 }
 
-void Simulator::buttonsUpdate(uint8_t newValue) {
+void Simulator::buttonsUpdated(uint8_t newValue) {
     m_buttonsCallback(newValue);
 }
 
-void Simulator::keyboardUpdate(uint16_t newValue) {
+void Simulator::keyboardUpdated(uint16_t newValue) {
     m_keyboardCallback(newValue);
 }
 
-void Simulator::potentiometerUpdate(int which, double fillPercent) {
+void Simulator::potentiometerUpdated(int which, double fillPercent) {
     m_potentiometersCallback(which,fillPercent);
 }
 

@@ -13,18 +13,18 @@ namespace View {
     public:
         ButtonsManager(QWidget *parent = 0);
         ~ButtonsManager();
-
         QList<int> pressedButtons() const;
+        uint8_t pressedBoolButtons() const;
 
     signals:
-        void buttonsStatusChanged() const;
+        void buttonsStatusChanged(uint8_t newValue);
 
     protected slots:
-        void buttonClicked() const;
+        void buttonUpdated();
 
     private: //fields
         static const int m_buttonsNr=6;
-        QList<QToolButton*> m_buttons;
+        QVector<QToolButton*> m_buttons;
 
     };
 }

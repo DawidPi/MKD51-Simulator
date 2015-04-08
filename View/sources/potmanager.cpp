@@ -13,19 +13,20 @@ PotManager::PotManager(QWidget *parent)
     for(int iter=0; iter<m_pots; iter++)
     {
         QSlider* newSlider = new QSlider(Qt::Horizontal);
-        newSlider->setMaximum(100);
+        newSlider->setMaximum(m_slidersMaxValue);
         newSlider->setMinimum(0);
         m_sliders.append(newSlider);
         mainLayout->addRow("Pot: " + QString::number(iter+1),
                            newSlider);
+        connect(newSlider,SIGNAL(sliderMoved(int)), this,SLOT(sliderUpdated(int)));
     }
 
     setLayout(mainLayout);
 }
 
-void PotManager::sliderChanged(int newValue)
+void PotManager::sliderUpdated(int newValue)
 {
-    double lostResistance = m_potMaxVoltage/newValue;
+    double lostVolategeOnResistance = m_potMaxVoltage*newValue/m_slidersMaxValue;
 
     QSlider* potentiometer = qobject_cast<QSlider*>(sender());
     int offset;
@@ -39,7 +40,7 @@ void PotManager::sliderChanged(int newValue)
         }
     }
 
-    emit potResistanceChanged(offset, m_potMaxVoltage-lostResistance);
+    emit potResistanceChanged(offset, m_potMaxVoltage-lostVolategeOnResistance);
 }
 
 PotManager::~PotManager()

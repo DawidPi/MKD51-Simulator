@@ -23,12 +23,14 @@ MainView::MainView(QWidget *parent) :
             subLayout->addLayout(potsDiodeBuzz);
     mainLayout->addLayout(subLayout);
 
+    makeConnections();
+
     setWindowTitle("MKD51 Simulator - iDSP");
     setLayout(mainLayout);
 }
 
-void MainView::createBuzzAndL8Diode(QLayout* layout)
-{
+void MainView::createBuzzAndL8Diode(QLayout* layout) {
+
     QHBoxLayout* elementsLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("out: Buzz P1.7, out: Diode P1.6"));
 
@@ -42,8 +44,8 @@ void MainView::createBuzzAndL8Diode(QLayout* layout)
     layout->addWidget(box);
 }
 
-void MainView::createButtons(QLayout* layout)
-{
+void MainView::createButtons(QLayout* layout) {
+
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("buttons (addr:0x8009)"));
 
@@ -54,8 +56,8 @@ void MainView::createButtons(QLayout* layout)
     layout->addWidget(box);
 }
 
-void MainView::createDiodes(QLayout* layout)
-{
+void MainView::createDiodes(QLayout* layout) {
+
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("diodes (addr:0x8008)"));
 
@@ -66,14 +68,14 @@ void MainView::createDiodes(QLayout* layout)
     layout->addWidget(box);
 }
 
-void MainView::createPinView(QLayout* layout)
-{
+void MainView::createPinView(QLayout* layout) {
+
     ProcView* procPins = new ProcView;
     layout->addWidget(procPins);
 }
 
-void MainView::createSegmView(QLayout* layout)
-{
+void MainView::createSegmView(QLayout* layout) {
+
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("7 segm display (addr:0x8018)"));
 
@@ -84,8 +86,8 @@ void MainView::createSegmView(QLayout* layout)
     layout->addWidget(box);
 }
 
-void MainView::createKeyboard(QLayout* layout)
-{
+void MainView::createKeyboard(QLayout* layout) {
+
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("keyboard (out:P0,1 in:P2,5)"));
 
@@ -96,8 +98,8 @@ void MainView::createKeyboard(QLayout* layout)
     layout->addWidget(box);
 }
 
-void MainView::createPotentiometers(QLayout* layout)
-{
+void MainView::createPotentiometers(QLayout* layout) {
+
     QHBoxLayout* tmpLayout = new QHBoxLayout;
     QGroupBox* box = new QGroupBox(tr("Potentiometers (addr: 8005-7)"));
 
@@ -106,6 +108,63 @@ void MainView::createPotentiometers(QLayout* layout)
 
     box->setLayout(tmpLayout);
     layout->addWidget(box);
+}
+
+void MainView::makeConnections() {
+
+    connect(m_buttons, SIGNAL(buttonsStatusChanged(uint8_t)),
+            this, SLOT(buttonsUpdated(uint8_t)));
+    connect(m_potentiometers, SIGNAL(potResistanceChanged(int,double)),
+            this, SLOT(potentiometersUpdated(int,double)));
+    connect(m_keyboard, SIGNAL(keyboardLowLevelChanged(uint16_t)),
+            this, SLOT(keyboardUpdated(uint16_t)));
+}
+
+void MainView::buttonsUpdated(uint8_t newValues) {
+     qDebug() << "buttons updated: " << newValues;
+     emit buttonsChanged(newValues);
+}
+
+void MainView::keyboardUpdated(uint16_t newValues) {
+    qDebug() << "keyboard Updated: " << newValues;
+    emit keyboardChanged(newValues);
+}
+
+void MainView::potentiometersUpdated(int which, double newVoltage) {
+    qDebug() << "potentiometer: " << which << "\n | volatge: " << newVoltage;
+    emit potentiometersChanged(which, newVoltage);
+}
+
+void MainView::reset() {
+    m_diodeL8->changeStatus(false);
+    m_buzzer->changeStatus(false);
+    m_diodes->changeDiodesState(0);
+    m_ledDisplay->reset();
+}
+
+void MainView::segmentUpdate(int letterOffset
+                             , SingleDigit::Segment segment,
+                             bool newState)
+{
+    QVector<SingleDigit::Segment> singleDigitVector;
+    m_ledDisplay->changeSegment(letterOffset, singleDigitVector,
+                                newState);
+}
+
+void MainView::diodesUpdate(int diode, bool newState) {
+    m_diodes->changeDiodesState(diode, newState);
+}
+
+void MainView::diodesUpdate(uint8_t newValues) {
+    m_diodes->changeDiodesState(newValues);
+}
+
+void MainView::buzzerUpdate(bool newState) {
+    m_buzzer->changeStatus(newState);
+}
+
+void MainView::diodeL8Update(bool newState) {
+    m_diodeL8->changeStatus(newState);
 }
 
 }

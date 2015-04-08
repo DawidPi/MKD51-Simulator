@@ -1,5 +1,6 @@
 #include "../headers/buttonsmanager.h"
 #include <QHBoxLayout>
+#include <QDebug>
 
 namespace View{
 
@@ -8,16 +9,19 @@ ButtonsManager::ButtonsManager(QWidget *parent)
 {
     QHBoxLayout* mainLayout = new QHBoxLayout;
 
-    for(int iter=0; iter<m_buttonsNr; iter++)
-    {
+    m_buttons.reserve(m_buttonsNr);
+    m_buttons.fill(nullptr,m_buttonsNr);
+
+    for(int iter=m_buttonsNr-1; iter>=0; iter--) {
+
         QToolButton* newButton = new QToolButton;
         newButton->setText("X" + QString::number(iter));
         newButton->setCheckable(true);
         newButton->setMinimumHeight(40);
         newButton->setMinimumWidth(40);
-        m_buttons.append(newButton);
+        m_buttons.replace(iter,newButton);
 
-        connect(newButton, SIGNAL(clicked()),this,SLOT(buttonClicked()));
+        connect(newButton, SIGNAL(toggled(bool)),this,SLOT(buttonUpdated()));
 
         mainLayout->addWidget(newButton);
     }
@@ -25,8 +29,26 @@ ButtonsManager::ButtonsManager(QWidget *parent)
     setLayout(mainLayout);
 }
 
-QList<int> ButtonsManager::pressedButtons() const
-{
+
+void ButtonsManager::buttonUpdated() {
+
+    uint8_t newVals = pressedBoolButtons();
+    emit buttonsStatusChanged(newVals);
+}
+
+uint8_t ButtonsManager::pressedBoolButtons() const {
+
+    uint8_t lowLevelValues =0;
+
+    for(int iter=0; iter<m_buttons.size(); iter++)
+        if(m_buttons.at(iter)->isChecked())
+            lowLevelValues |= 1<<iter;
+
+    return lowLevelValues;
+}
+
+QList<int> ButtonsManager::pressedButtons() const {
+
     QList<int> buttonsPressed;
     for(int iter=0; iter<m_buttons.size(); iter++)
     {
@@ -39,13 +61,7 @@ QList<int> ButtonsManager::pressedButtons() const
     return buttonsPressed;
 }
 
-void ButtonsManager::buttonClicked() const
-{
-    emit buttonsStatusChanged();
-}
-
-ButtonsManager::~ButtonsManager()
-{
+ButtonsManager::~ButtonsManager() {
 
 }
 

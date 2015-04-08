@@ -31,7 +31,7 @@ void DiodeManager::changeDiodesState(int diodeOffset, bool newStatus)
     if(diodeOffset >= m_diodes.size())
         throw std::out_of_range("wrong offset in changeDiodesState");
 
-    m_diodes.at(diodeOffset)->setStatus(newStatus);
+    m_diodes.at(diodeOffset)->changeStatus(newStatus);
 }
 
 void DiodeManager::changeDiodesState(uint8_t newDiodesStatus)

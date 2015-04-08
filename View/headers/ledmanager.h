@@ -17,6 +17,7 @@ namespace View{
         void changeSegment(int letterOffset,
                            QVector<SingleDigit::Segment> segments,
                            bool newState);
+        void reset();
 
     private: //fields
         QVector<SingleDigit*> m_digits;

@@ -28,8 +28,27 @@ namespace View{
         KeyboardManager&    keyboard(){return *m_keyboard;}
         PotManager&         potentiometers(){return *m_potentiometers;}
 
+    public slots:
+        void reset();
+        void segmentUpdate(int letterOffset, View::SingleDigit::Segment segment,
+                           bool newState);
+        void diodesUpdate(int diode, bool newState);
+        void diodesUpdate(uint8_t newValues);
+        void buzzerUpdate(bool newState);
+        void diodeL8Update(bool newState);
+
+    signals:
+        void keyboardChanged(uint16_t newValues);
+        void buttonsChanged(uint8_t newValues);
+        void potentiometersChanged(int which, double fillPercent);
+
+    private slots:
+        void buttonsUpdated(uint8_t newValues);
+        void keyboardUpdated(uint16_t);
+        void potentiometersUpdated(int which, double fillPercent);
 
     private: //methods
+        void makeConnections();
         void createPinView(QLayout* layout);
         void createSegmView(QLayout* layout);
         void createDiodes(QLayout* layout);

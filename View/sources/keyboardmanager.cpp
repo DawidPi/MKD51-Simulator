@@ -25,7 +25,8 @@ void KeyboardManager::createButtons()
                                static_cast<KeyboardButton::Value>(
                                    currentRow*KeyboardButton::BUTTONS_IN_ROW+currentCol));
             m_buttons.append(newButton);
-            connect(newButton,SIGNAL(clicked(bool)),this,SLOT(buttonChanged(bool)));
+            connect(newButton,SIGNAL(pressed()),this,SLOT(buttonUpdated()));
+            connect(newButton,SIGNAL(released()),this,SLOT(buttonUpdated()));
             buttonsLayout->addWidget(newButton,currentRow,currentCol);
         }
     }
@@ -33,14 +34,29 @@ void KeyboardManager::createButtons()
     setLayout(buttonsLayout);
 }
 
-void KeyboardManager::buttonChanged(bool newValue)
+void KeyboardManager::buttonUpdated()
 {
     KeyboardButton* button = qobject_cast<KeyboardButton*>(sender());
 
-    if(newValue)
+    if(button->isDown())
         emit buttonPressed(button->value());
     else
-        emit buttonPressed(button->value());
+        emit buttonReleased(button->value());
+
+    uint16_t lowLevelValues = getLowLevelKeyboardStatus();
+    emit keyboardLowLevelChanged(lowLevelValues);
+}
+
+uint16_t KeyboardManager::getLowLevelKeyboardStatus() {
+    uint16_t lowLevelValue=0;
+    const int bitsInTwoBytes=16;
+
+    for(int iter=0; iter<bitsInTwoBytes; iter++) {
+        if(m_buttons.at(iter)->isDown())
+            lowLevelValue |= 1<<iter;
+    }
+
+    return lowLevelValue;
 }
 
 KeyboardManager::~KeyboardManager()

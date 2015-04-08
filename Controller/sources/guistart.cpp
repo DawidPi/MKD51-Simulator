@@ -6,7 +6,6 @@ namespace Controller {
 
 GuiStart::GuiStart() : m_started(false)
 {
-    qDebug() << "in functor constructor";
 }
 
 void GuiStart::operator ()() {

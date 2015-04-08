@@ -17,14 +17,16 @@ namespace View {
     signals:
         void buttonPressed(KeyboardButton::Value Button);
         void buttonReleased(KeyboardButton::Value Button);
+        void keyboardLowLevelChanged(uint16_t);
 
     private slots:
-        void buttonChanged(bool newValue);
+        void buttonUpdated();
 
     private: //fields
     QVector<KeyboardButton*> m_buttons;
 
     private: //Methods
+        uint16_t getLowLevelKeyboardStatus();
         void createButtons();
     };
 }

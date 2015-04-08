@@ -15,13 +15,14 @@ namespace View{
         ~PotManager();
 
     signals:
-        void potResistanceChanged(int potOffset, double newResistance);
+        void potResistanceChanged(int potOffset, double newVolatage);
 
     private slots:
-        void sliderChanged(int newValue);
+        void sliderUpdated(int newValue);
 
     private:
         double m_potMaxVoltage=5;
+        int m_slidersMaxValue=100;
         QVector<QSlider*> m_sliders;
         static const int m_pots=3;
     };

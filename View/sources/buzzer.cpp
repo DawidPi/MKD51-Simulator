@@ -32,7 +32,6 @@ void Buzzer::paintEvent(QPaintEvent* event)
 void Buzzer::changeStatus(bool turnedOn)
 {
     m_turnedOn = turnedOn;
-
     update();
 }
 
