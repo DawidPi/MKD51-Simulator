@@ -1,0 +1,12 @@
+#ifndef MKD51_PLUGIN_GLOBAL_H
+#define MKD51_PLUGIN_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(MKD51_PLUGIN_LIBRARY)
+#  define MKD51_PLUGINSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define MKD51_PLUGINSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // MKD51_PLUGIN_GLOBAL_H
