@@ -21,7 +21,7 @@ namespace Controller {
                      bool newState);
         void diodes(uint8_t numberInBinary);
         void diodes(int diode, bool newState);
-        void buttons(std::function<void(uint8_t states)>& callback);
+        void buttons(std::function<void(uint8_t states)> callback);
         void keyboard(std::function<void(uint16_t states)> callback);
         void buzzer(bool newState);
         void diodeL8(bool newState);
@@ -47,11 +47,12 @@ namespace Controller {
         explicit Simulator(QObject* parent=0);
 
     private: //fields
+        QMutex mutex;
         std::function<void(uint8_t)> m_buttonsCallback;
         std::function<void(uint16_t)> m_keyboardCallback;
         std::function<void(int which, double fillPercent)> m_potentiometersCallback;
 
-        GuiStart m_guiStartFunctor;
+        GuiStart* m_guiStartFunctor;
     };
 
 }

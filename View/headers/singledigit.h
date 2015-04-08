@@ -6,6 +6,7 @@
 #include <tuple>
 #include <QPoint>
 #include <QPointF>
+#include <QMetaType>
 
 namespace View{
 

@@ -1,5 +1,6 @@
 #include "../headers/keyboardmanager.h"
 #include <QGridLayout>
+#include <QMetaType>
 #include "../headers/keyboardbutton.h"
 
 namespace View {
@@ -7,6 +8,8 @@ namespace View {
 KeyboardManager::KeyboardManager(QWidget *parent) :
     QWidget(parent)
 {
+    qRegisterMetaType<uint16_t>("uint16_t");
+    qRegisterMetaType<uint8_t>("uint8_t");
     createButtons();
     setMinimumWidth(225);//just to see all the title
     setWindowTitle(tr("MKD51 Keyboard"));

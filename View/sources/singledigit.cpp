@@ -13,6 +13,7 @@ namespace View {
 SingleDigit::SingleDigit(QWidget *parent,int borderWidth, QColor borderColor, QColor segmentColor,double scale) :
     QWidget(parent)
 {
+    qRegisterMetaType<View::SingleDigit::Segment>("View::SingleDigit::Segment");
     //base size of this widget
     QSize fixedSize(50,67); //to private section?
     m_scale = scale;
