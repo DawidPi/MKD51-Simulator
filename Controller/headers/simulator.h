@@ -15,6 +15,7 @@ namespace Controller {
         Q_OBJECT
     public:
         static Simulator& simulator();
+        ~Simulator();
 
         void startGui();
         void segment(int letterOffset, View::SingleDigit::Segment segment,

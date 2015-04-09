@@ -11,6 +11,10 @@ Simulator::Simulator(QObject *parent) :
 {
 }
 
+Simulator::~Simulator() {
+    delete m_guiStartFunctor;
+}
+
 Simulator& Simulator::simulator() {
     static Simulator mainSimulator;
     return mainSimulator;
