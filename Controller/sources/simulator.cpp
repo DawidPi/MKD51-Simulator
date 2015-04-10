@@ -95,14 +95,17 @@ void Simulator::potentiometers(std::function<void (int, double)> callback) {
 }
 
 void Simulator::buttonsUpdated(uint8_t newValue) {
+    if(m_buttonsCallback)
     m_buttonsCallback(newValue);
 }
 
 void Simulator::keyboardUpdated(uint16_t newValue) {
+    if(m_keyboardCallback)
     m_keyboardCallback(newValue);
 }
 
 void Simulator::potentiometerUpdated(int which, double fillPercent) {
+    if(m_potentiometersCallback)
     m_potentiometersCallback(which,fillPercent);
 }
 

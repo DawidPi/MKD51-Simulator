@@ -2,6 +2,7 @@
 #define KEYBOARDMANAGER_H
 
 #include <QWidget>
+#include <cstdint>
 #include "keyboardbutton.h"
 
 namespace View {

@@ -1,5 +1,6 @@
 #include "mkd51_plugin.h"
 #include "AGSI_Defs.h"
+#include "Controller/headers/simulator.h"
 #include <QWidget>
 
 
@@ -49,8 +50,7 @@ bool DefineAllMenuEntries() {
 }
 
 void showMessage(AgsiDynaM *pm) {
-    QObject someObject;
-//   MessageBox(NULL, (LPCTSTR)"text", (LPCTSTR)"text", MB_OK); // for tests only
+    Controller::Simulator::simulator().startGui();
 }
 
 bool AgsiInit() {

@@ -2,7 +2,7 @@
 #define DIODEMANAGER_H
 
 #include <QWidget>
-#include <inttypes.h>
+#include <cstdint>
 #include <exception>
 #include "diode.h"
 

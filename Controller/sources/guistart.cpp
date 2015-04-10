@@ -1,5 +1,6 @@
 #include "../headers/guistart.h"
 #include <QApplication>
+#include <QDir>
 
 namespace Controller {
 
@@ -13,6 +14,9 @@ void GuiStart::operator ()() {
     char* string[] = {"something", "" }; // simply cheating QApp
 
     QApplication app(one,string);
+    qApp->addLibraryPath("C:\\QTLIBS");
+    qApp->addLibraryPath(qApp->applicationDirPath());
+    qApp->addLibraryPath(QDir::currentPath());
     qApp->setStyleSheet("QGroupBox {"
                         "border: 1px solid gray;"
                         "border-radius: 3px;"

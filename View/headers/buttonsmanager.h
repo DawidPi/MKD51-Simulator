@@ -1,6 +1,7 @@
 #ifndef BUTTONSMANAGER_H
 #define BUTTONSMANAGER_H
 
+#include <cstdint>
 #include <QWidget>
 #include <QToolButton>
 

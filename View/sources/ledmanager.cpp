@@ -43,7 +43,7 @@ void LedManager::reset() {
                 << SingleDigit::Segment::SEG_G
                 << SingleDigit::Segment::SEG_P;
 
-    for(int currentOffset; currentOffset<m_digits.size(); currentOffset++) {
+    for(int currentOffset=0; currentOffset<m_digits.size(); currentOffset++) {
         changeSegment(currentOffset,allSegments,false);
     }
 }
