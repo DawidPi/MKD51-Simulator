@@ -54,6 +54,7 @@ void Simulator::startGui() {
             gui,SLOT(segmentUpdate(int,View::SingleDigit::Segment,bool)));
     connect(this, SIGNAL(ledDisplayReset()), gui, SLOT(ledDisplayReset()));
     connect(this,SIGNAL(closeGui()), gui, SLOT(close()));
+    connect(this,SIGNAL(finish()), gui, SLOT(deleteLater()));
     mutex.unlock();
 
     m_guiStarted = true;
@@ -79,8 +80,12 @@ void Simulator::diodes(uint8_t numberInBinary) {
     }
 }
 
+std::thread& Simulator::thread() {
+    return *m_thread;
+}
+
 void Simulator::stopGui() {
-    emit closeGui();
+    emit finish();
 }
 
 bool Simulator::guiStarted() {

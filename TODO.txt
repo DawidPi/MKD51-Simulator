@@ -1,4 +1,3 @@
--> finish implementing implement Model(Connector)
--> add terminate to the simulator
--> bug!! when closing debug mode, simulator still exists
+-> finish implementing Model(Connector)
+-> Model should work even when gui is off.
 -> HAVE FUN!

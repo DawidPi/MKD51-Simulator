@@ -31,8 +31,9 @@ namespace Controller {
         void diodeL8(bool newState);
         void potentiometers(std::function<void(int which, double newVoltage)>
                            callback);
+        std::thread& thread();
 
-        std::thread* m_thread; //to be deleted in final state
+
 
     public slots:
         void buttonsUpdated(uint8_t newValue);
@@ -40,6 +41,7 @@ namespace Controller {
         void potentiometerUpdated(int which, double newVoltage);
 
     signals:
+        void finish();
         void closeGui();
         void ledDisplayReset();
         void segmentChange(int letterOffset, View::SingleDigit::Segment segment,
@@ -56,6 +58,7 @@ namespace Controller {
         explicit Simulator(QObject* parent=0);
 
     private: //fields
+        std::thread* m_thread;
         QMutex mutex;
         bool m_guiStarted;
         std::function<void(uint8_t)> m_buttonsCallback;
