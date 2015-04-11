@@ -29,7 +29,7 @@ namespace Controller {
         void keyboard(std::function<void(uint16_t states)> callback);
         void buzzer(bool newState);
         void diodeL8(bool newState);
-        void potentiometers(std::function<void(int which, double fillPercent)>
+        void potentiometers(std::function<void(int which, double newVoltage)>
                            callback);
 
         std::thread* m_thread; //to be deleted in final state
@@ -37,7 +37,7 @@ namespace Controller {
     public slots:
         void buttonsUpdated(uint8_t newValue);
         void keyboardUpdated(uint16_t newValue);
-        void potentiometerUpdated(int which, double fillPercent);
+        void potentiometerUpdated(int which, double newVoltage);
 
     signals:
         void closeGui();
@@ -60,7 +60,7 @@ namespace Controller {
         bool m_guiStarted;
         std::function<void(uint8_t)> m_buttonsCallback;
         std::function<void(uint16_t)> m_keyboardCallback;
-        std::function<void(int which, double fillPercent)> m_potentiometersCallback;
+        std::function<void(int which, double newVoltage)> m_potentiometersCallback;
 
         GuiStart* m_guiStartFunctor;
     };

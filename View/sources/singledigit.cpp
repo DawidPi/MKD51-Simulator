@@ -30,13 +30,8 @@ SingleDigit::SingleDigit(QWidget *parent,int borderWidth, QColor borderColor, QC
 }
 
 void SingleDigit::changeState(Segment segment, bool turnedOn){
-    try{
-        m_states.at(static_cast<int>(segment)) = turnedOn;
-    }
-    catch(const std::out_of_range& exception){
-        qDebug() << "out of range in SingleDigit::changeState()";
-        throw exception;
-    }
+    if(segment >= Segment::SEG_A && segment <= Segment::SEG_P)
+        m_states[static_cast<int>(segment)] = turnedOn;
 
     update();
 }

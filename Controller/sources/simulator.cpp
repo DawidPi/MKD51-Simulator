@@ -121,9 +121,9 @@ void Simulator::keyboardUpdated(uint16_t newValue) {
     m_keyboardCallback(newValue);
 }
 
-void Simulator::potentiometerUpdated(int which, double fillPercent) {
+void Simulator::potentiometerUpdated(int which, double newVoltage) {
     if(m_potentiometersCallback)
-    m_potentiometersCallback(which,fillPercent);
+    m_potentiometersCallback(which,newVoltage);
 }
 
 void Simulator::guiClosed() {

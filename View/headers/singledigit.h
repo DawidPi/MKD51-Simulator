@@ -27,8 +27,6 @@ namespace View{
         void setSegmentColor(QColor & segmentColor){m_segmentColor = segmentColor; update();}
         void setBorderColor(QColor & borderColor){m_borderColor = borderColor; update();}
 
-        // U cannot use SEG_MAX as a argument or it throws out of range
-        // exception
         void changeState(Segment segment, bool turnedOn);
 
     protected:

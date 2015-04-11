@@ -31,7 +31,7 @@ DiodeManager::DiodeManager(QWidget *parent)
 void DiodeManager::changeDiodesState(int diodeOffset, bool newStatus)
 {
     if(diodeOffset >= m_diodes.size())
-        throw std::out_of_range("wrong offset in changeDiodesState");
+        return;
 
     m_diodes.at(diodeOffset)->changeStatus(newStatus);
 }
