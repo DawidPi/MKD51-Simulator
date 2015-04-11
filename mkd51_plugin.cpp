@@ -1,6 +1,7 @@
 #include "mkd51_plugin.h"
 #include "AGSI_Defs.h"
 #include "Controller/headers/simulator.h"
+#include "Model/headers/keillistener.h"
 #include <QWidget>
 
 
@@ -30,9 +31,16 @@ extern "C" DWORD AGSIEXPORT AgsiEntry (DWORD nCode, void *vp) {
 
       if (!DefineAllMenuEntries())
           return false;
+
+      if(!Model::KeilListener::init(Agsi))
+          return false;
+
+
+
       break;
 
     case AGSI_TERMINATE:
+        Controller::Simulator::simulator().closeGui();
       break;
 
     case AGSI_RESET:
@@ -50,8 +58,9 @@ bool DefineAllMenuEntries() {
 }
 
 void showMessage(AgsiDynaM *pm) {
-    if(!Controller::Simulator::simulator().guiStarted())
+    if(!Controller::Simulator::simulator().guiStarted()) {
         Controller::Simulator::simulator().startGui();
+    }
     else
         Controller::Simulator::simulator().stopGui();
 }

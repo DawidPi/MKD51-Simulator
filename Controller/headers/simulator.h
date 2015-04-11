@@ -20,6 +20,7 @@ namespace Controller {
         void startGui();
         void stopGui();
         bool guiStarted();
+        void ledDisplayClean();
         void segment(int letterOffset, View::SingleDigit::Segment segment,
                      bool newState);
         void diodes(uint8_t numberInBinary);
@@ -40,12 +41,16 @@ namespace Controller {
 
     signals:
         void closeGui();
+        void ledDisplayReset();
         void segmentChange(int letterOffset, View::SingleDigit::Segment segment,
                            bool newState);
         void diodesChange(int diode, bool newState);
         void diodesChange(uint8_t newValues);
         void buzzerChange(bool newState);
         void diodeL8Change(bool newState);
+
+    private slots:
+        void guiClosed();
 
     private: //methods
         explicit Simulator(QObject* parent=0);

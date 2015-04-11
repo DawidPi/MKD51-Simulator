@@ -2,6 +2,7 @@
 #define MAINVIEW
 
 #include <QWidget>
+#include <QCloseEvent>
 #include "buttonsmanager.h"
 #include "diodemanager.h"
 #include "keyboardmanager.h"
@@ -28,8 +29,11 @@ namespace View{
         KeyboardManager&    keyboard(){return *m_keyboard;}
         PotManager&         potentiometers(){return *m_potentiometers;}
 
+        void closeEvent(QCloseEvent *event);
+
     public slots:
         void reset();
+        void ledDisplayReset();
         void segmentUpdate(int letterOffset, View::SingleDigit::Segment segment,
                            bool newState);
         void diodesUpdate(int diode, bool newState);
@@ -38,6 +42,7 @@ namespace View{
         void diodeL8Update(bool newState);
 
     signals:
+        void closed();
         void keyboardChanged(uint16_t newValues);
         void buttonsChanged(uint8_t newValues);
         void potentiometersChanged(int which, double fillPercent);

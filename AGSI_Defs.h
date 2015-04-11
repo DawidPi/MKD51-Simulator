@@ -78,5 +78,4 @@ struct AGSIFUNCS {
   tAgsiGetSymbolByValue      GetSymbolByValue;
 };
 
-
 #endif

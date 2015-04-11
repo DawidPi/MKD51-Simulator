@@ -38,6 +38,7 @@ void Simulator::startGui() {
             this, SLOT(keyboardUpdated(uint16_t)),Qt::DirectConnection);
     connect(gui,SIGNAL(potentiometersChanged(int,double)),
             this,SLOT(potentiometerUpdated(int,double)),Qt::DirectConnection);
+    connect(gui, SIGNAL(closed()), this, SLOT(guiClosed()), Qt::DirectConnection);
 
     //outputs
     connect(this,SIGNAL(diodesChange(int,bool)),
@@ -51,6 +52,7 @@ void Simulator::startGui() {
     connect(this,SIGNAL(segmentChange(int,
                                       View::SingleDigit::Segment,bool)),
             gui,SLOT(segmentUpdate(int,View::SingleDigit::Segment,bool)));
+    connect(this, SIGNAL(ledDisplayReset()), gui, SLOT(ledDisplayReset()));
     connect(this,SIGNAL(closeGui()), gui, SLOT(close()));
     mutex.unlock();
 
@@ -79,7 +81,6 @@ void Simulator::diodes(uint8_t numberInBinary) {
 
 void Simulator::stopGui() {
     emit closeGui();
-    m_guiStarted=false;
 }
 
 bool Simulator::guiStarted() {
@@ -92,6 +93,10 @@ void Simulator::buzzer(bool newState) {
 
 void Simulator::diodeL8(bool newState) {
     emit diodeL8Change(newState);
+}
+
+void Simulator::ledDisplayClean() {
+    emit ledDisplayReset();
 }
 
 void Simulator::buttons(std::function<void (uint8_t)> callback) {
@@ -119,6 +124,10 @@ void Simulator::keyboardUpdated(uint16_t newValue) {
 void Simulator::potentiometerUpdated(int which, double fillPercent) {
     if(m_potentiometersCallback)
     m_potentiometersCallback(which,fillPercent);
+}
+
+void Simulator::guiClosed() {
+    m_guiStarted=false;
 }
 
 }

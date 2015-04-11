@@ -122,6 +122,11 @@ void MainView::makeConnections() {
             this, SLOT(keyboardUpdated(uint16_t)));
 }
 
+void MainView::closeEvent(QCloseEvent *event) {
+    emit closed();
+    event->accept();
+}
+
 void MainView::buttonsUpdated(uint8_t newValues) {
 
      emit buttonsChanged(newValues);
@@ -168,6 +173,10 @@ void MainView::buzzerUpdate(bool newState) {
 
 void MainView::diodeL8Update(bool newState) {
     m_diodeL8->changeStatus(newState);
+}
+
+void MainView::ledDisplayReset() {
+    m_ledDisplay->reset();
 }
 
 }

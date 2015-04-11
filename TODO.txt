@@ -1,2 +1,4 @@
--> implement Model(Connector)
+-> finish implementing implement Model(Connector)
+-> add terminate to the simulator
+-> bug!! when closing debug mode, simulator still exists
 -> HAVE FUN!

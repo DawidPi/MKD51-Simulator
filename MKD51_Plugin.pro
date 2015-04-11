@@ -26,7 +26,9 @@ SOURCES += mkd51_plugin.cpp \
         View/sources/buzzer.cpp \
         View/sources/ledmanager.cpp \
         Controller/sources/simulator.cpp \
-        Controller/sources/guistart.cpp
+        Controller/sources/guistart.cpp \
+        Model/sources/keillistener.cpp \
+        Model/sources/guilistener.cpp \
 
 HEADERS += mkd51_plugin.h\
         mkd51_plugin_global.h \
@@ -44,7 +46,9 @@ HEADERS += mkd51_plugin.h\
         View/headers/buzzer.h \
         View/headers/ledmanager.h \
         Controller/headers/simulator.h \
-        Controller/headers/guistart.h
+        Controller/headers/guistart.h \
+        Model/headers/keillistener.h \
+        Model/headers/guilistener.h
 
 unix {
     target.path = /usr/lib
