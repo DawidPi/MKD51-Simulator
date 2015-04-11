@@ -18,6 +18,8 @@ namespace Controller {
         ~Simulator();
 
         void startGui();
+        void stopGui();
+        bool guiStarted();
         void segment(int letterOffset, View::SingleDigit::Segment segment,
                      bool newState);
         void diodes(uint8_t numberInBinary);
@@ -37,6 +39,7 @@ namespace Controller {
         void potentiometerUpdated(int which, double fillPercent);
 
     signals:
+        void closeGui();
         void segmentChange(int letterOffset, View::SingleDigit::Segment segment,
                            bool newState);
         void diodesChange(int diode, bool newState);
@@ -49,6 +52,7 @@ namespace Controller {
 
     private: //fields
         QMutex mutex;
+        bool m_guiStarted;
         std::function<void(uint8_t)> m_buttonsCallback;
         std::function<void(uint16_t)> m_keyboardCallback;
         std::function<void(int which, double fillPercent)> m_potentiometersCallback;

@@ -7,7 +7,7 @@
 namespace Controller {
 
 Simulator::Simulator(QObject *parent) :
-    QObject(parent)
+    QObject(parent), m_guiStarted(false)
 {
 }
 
@@ -51,7 +51,10 @@ void Simulator::startGui() {
     connect(this,SIGNAL(segmentChange(int,
                                       View::SingleDigit::Segment,bool)),
             gui,SLOT(segmentUpdate(int,View::SingleDigit::Segment,bool)));
+    connect(this,SIGNAL(closeGui()), gui, SLOT(close()));
     mutex.unlock();
+
+    m_guiStarted = true;
 }
 
 void Simulator::segment(int letterOffset,
@@ -72,6 +75,15 @@ void Simulator::diodes(uint8_t numberInBinary) {
         else
             emit diodesChange(diode,false);
     }
+}
+
+void Simulator::stopGui() {
+    emit closeGui();
+    m_guiStarted=false;
+}
+
+bool Simulator::guiStarted() {
+    return m_guiStarted;
 }
 
 void Simulator::buzzer(bool newState) {

@@ -50,7 +50,10 @@ bool DefineAllMenuEntries() {
 }
 
 void showMessage(AgsiDynaM *pm) {
-    Controller::Simulator::simulator().startGui();
+    if(!Controller::Simulator::simulator().guiStarted())
+        Controller::Simulator::simulator().startGui();
+    else
+        Controller::Simulator::simulator().stopGui();
 }
 
 bool AgsiInit() {
