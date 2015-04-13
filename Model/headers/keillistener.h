@@ -21,7 +21,7 @@ namespace Model {
 
     private:
 
-        static const int m_Port1Addr=0x90;
+        static const int m_port1Addr=0x90;
         static const int m_buzzerPin=7;
         static const int m_diodeL8Pin=6;
 
