@@ -17,15 +17,19 @@ namespace Model {
     }
 
     void GuiListener::keyboard(uint16_t values) {
-
+        m_agsi.Message("Keyboard callback launched\n");
+        m_agsi.UpdateWindows();
     }
 
     void GuiListener::potentiometers(int which, double newVoltage) {
-
+        m_agsi.Message("potentiometer callback launched\n");
+        m_agsi.UpdateWindows();
     }
 
     void GuiListener::buttons(uint8_t buttons) {
-        //m_agsi.WriteMemory()
+        buttons |= 0xF0;
+        m_agsi.WriteMemory(m_buttonsExtAddr, 1, &buttons);
+        m_agsi.UpdateWindows();
     }
 
 }

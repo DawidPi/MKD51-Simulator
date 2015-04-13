@@ -27,7 +27,7 @@ MainView::MainView(QWidget *parent) :
 
     makeConnections();
 
-    setWindowTitle("MKD51 Simulator - iDSP");
+    setWindowTitle("MKD51 Simulator");
     setLayout(mainLayout);
 }
 

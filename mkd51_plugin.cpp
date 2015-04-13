@@ -2,6 +2,7 @@
 #include "AGSI_Defs.h"
 #include "Controller/headers/simulator.h"
 #include "Model/headers/keillistener.h"
+#include "Model/headers/guilistener.h"
 #include <QWidget>
 
 
@@ -34,7 +35,8 @@ extern "C" DWORD AGSIEXPORT AgsiEntry (DWORD nCode, void *vp) {
 
       if(!Model::KeilListener::init(Agsi))
           return false;
-
+      if(!Model::GuiListener::init(Agsi))
+          return false;
       break;
 
     case AGSI_TERMINATE:
