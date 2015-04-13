@@ -40,10 +40,10 @@ void KeilListener::buzzer(DWORD port1) {
 
     DWORD mask = 1<<m_buzzerPin;
     if((port1&mask)==0){
-        Controller::Simulator::simulator().buzzer(true);
+        Controller::Simulator::simulator().buzzer(false);
     }
     else
-        Controller::Simulator::simulator().buzzer(false);
+        Controller::Simulator::simulator().buzzer(true);
 }
 
 void KeilListener::diodeL8(DWORD port1) {
@@ -51,10 +51,10 @@ void KeilListener::diodeL8(DWORD port1) {
     DWORD mask = 1<<m_diodeL8Pin;
 
     if((port1&mask)==0) {
-        Controller::Simulator::simulator().diodeL8(true);
+        Controller::Simulator::simulator().diodeL8(false);
     }
     else
-        Controller::Simulator::simulator().diodeL8(false);
+        Controller::Simulator::simulator().diodeL8(true);
 
 }
 
@@ -95,7 +95,7 @@ std::vector<View::SingleDigit::Segment> KeilListener::numberToSegments(BYTE numb
 
     std::vector<View::SingleDigit::Segment> segments;
 
-    for(uint8_t mask=0x80, iteration=0; mask!=0; mask>>=1, iteration++) {
+    for(uint8_t mask=0x01, iteration=0; mask!=0; mask<<=1, iteration++) {
         if(number & mask)
             segments.push_back(static_cast<View::SingleDigit::Segment>(iteration));
     }
