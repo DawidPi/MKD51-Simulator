@@ -8,7 +8,7 @@ In Keil:
 ->Options for target
 ->Debug
 ->Check Use simulator and Limit Speed to Real-Time
-->next to dialog DLL there is a section parameter: (add -dMKD51-Plugin)
+->next to dialog DLL there is a section parameter: (add -dMKD51_Plugin)
 
 Notes:
 Simulator does not work with all possible 8051 uC due to Keil bugs. As far tested only with intel's 8051
