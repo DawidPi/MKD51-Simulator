@@ -35,12 +35,10 @@ extern "C" DWORD AGSIEXPORT AgsiEntry (DWORD nCode, void *vp) {
       if(!Model::KeilListener::init(Agsi))
           return false;
 
-
-
       break;
 
     case AGSI_TERMINATE:
-        Controller::Simulator::simulator().closeGui();
+        Controller::Simulator::simulator().finish();
         Controller::Simulator::simulator().thread().join();
       break;
 
@@ -62,8 +60,9 @@ void showMessage(AgsiDynaM *pm) {
     if(!Controller::Simulator::simulator().guiStarted()) {
         Controller::Simulator::simulator().startGui();
     }
-    else
-        Controller::Simulator::simulator().stopGui();
+    else {
+        Controller::Simulator::simulator().finish();
+    }
 }
 
 bool AgsiInit() {

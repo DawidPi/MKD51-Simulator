@@ -21,6 +21,8 @@ Simulator& Simulator::simulator() {
 }
 
 void Simulator::startGui() {
+    if(m_guiStartFunctor)
+        delete m_guiStartFunctor;
     m_guiStartFunctor = new GuiStart;
     std::reference_wrapper<GuiStart> guiFunctor(*m_guiStartFunctor);
     m_thread = new std::thread(guiFunctor);
