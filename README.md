@@ -1,9 +1,9 @@
 # MKD51-Simulator
 dll applicatiom for Keil, that simulates MKD51 peripherals
 
-# Installation:
-Copy all dlls and folders with dlls to Keil_v5/BIN directory.
-!!! UPDATE!!! Copy the same files without MKD51_Plugin.dll to the Keil_v5/UV4 directory or else it will fail
+# Installation: !!UPDATE!!
+Copy all dlls and folders with dlls the Keil_v5/UV4 directory.
+copu MKD51_Plugin.dll to Keil_v5/BIN directory
 
 In Keil:
 ->Options for target
