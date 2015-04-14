@@ -3,6 +3,7 @@ dll applicatiom for Keil, that simulates MKD51 peripherals
 
 # Installation:
 Copy all dlls and folders with dlls to Keil_v5/BIN directory.
+!!! UPDATE!!! Copy the same files without MKD51_Plugin.dll to the Keil_v5/UV4 directory or else it will fail
 
 In Keil:
 ->Options for target
