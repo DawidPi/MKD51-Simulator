@@ -5,6 +5,8 @@
 
 static AGSIFUNCS m_agsi;
 
+enum class InitStatus{NOT_INITIALIZED, MKD_MONITOR_INITIALIZED,
+                     PERIPHERALS_INITIALIZED};
 
 namespace Model {
 
@@ -29,24 +31,40 @@ void KeilListener::port1Listener() {
 
     DWORD Port1Val, prevVal;
     DWORD mask=0xFF;
+    static InitStatus initialized=NOT_INITIALIZED;
 
     if(m_agsi.ReadSFR(m_port1Addr,&Port1Val, &prevVal, mask)) {
-        buzzer(Port1Val);
-        diodeL8(Port1Val);
-        ledDisplay();
-        keyboard(Port1Val);
+        if(initialized == NOT_INITIALIZED) {
+            monitorMKD();
+            initialized = MKD_MONITOR_INITIALIZED;
+        }
+        else if(initialized == MKD_MONITOR_INITIALIZED) {
+            peripheralsStart();
+            initialized = PERIPHERALS_INITIALIZED;
+        }
+        else {
+            buzzer(Port1Val);
+            diodeL8(Port1Val);
+            ledDisplay();
+            keyboard(Port1Val);
+        }
     }
 
 }
 
+void KeilListener::peripheralsStart() {
+
+}
+
+void KeilListener::monitorMKD() {
+    m_agsi.WriteSFR(m_port1Addr,0x3C, 0xFF);
+}
+
 void KeilListener::keyboard(DWORD port1) {
     uint16_t values=Model::GuiListener::keyboardVal();
-    m_agsi.Message("Keyboard Gui listener launched\n");
 
-    int maskOutYounger = 0x01;
-    int maskOutOlder = 0x02;
     uint8_t firstRow = 0 | ((values & 0x8000) | ((values & 0x800)<<3) |
-         ((values & 0x80)<<6) | ((values&8)<<9));
+                               ((values & 0x80)<<6) | ((values&8)<<9));
     uint8_t secondRow =  0 | (((values & 0x4000)<<1) | ((values & 0x400)<<4) |
                               ((values & 0x40)<<7) | ((values&4)<<10));
     uint8_t thirdRow =  0 | (((values & 0x2000)<<2) | ((values & 0x200)<<5) |
@@ -56,6 +74,7 @@ void KeilListener::keyboard(DWORD port1) {
     BYTE result=0;
     DWORD maskedPort = port1 & 0x03;
 
+    // change it for an array
     switch(maskedPort){
     case 0:
         result = firstRow;
@@ -82,7 +101,6 @@ void KeilListener::keyboard(DWORD port1) {
 }
 
 void KeilListener::buzzer(DWORD port1) {
-
     DWORD mask = 1<<m_buzzerPin;
     if((port1&mask)==0){
         Controller::Simulator::simulator().buzzer(false);
@@ -104,7 +122,6 @@ void KeilListener::diodeL8(DWORD port1) {
 }
 
 void KeilListener::diodes() {
-
     BYTE diodesValue;
 
     if(m_agsi.ReadMemory(m_diodesExtAddr, 1, &diodesValue)) {
