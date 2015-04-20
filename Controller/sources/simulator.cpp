@@ -54,7 +54,7 @@ void Simulator::startGui() {
     connect(this,SIGNAL(segmentChange(int,
                                       View::SingleDigit::Segment,bool)),
             gui,SLOT(segmentUpdate(int,View::SingleDigit::Segment,bool)), Qt::DirectConnection);
-    connect(this, SIGNAL(ledDisplayReset()), gui, SLOT(ledDisplayReset()));
+    connect(this, SIGNAL(ledDisplayReset()), gui, SLOT(ledDisplayReset()), Qt::DirectConnection);
     connect(this,SIGNAL(closeGui()), gui, SLOT(close()));
     connect(this,SIGNAL(finish()), gui, SLOT(deleteLater()));
     mutex.unlock();

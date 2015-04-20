@@ -124,7 +124,7 @@ void KeilListener::diodes() {
 }
 
 void KeilListener::ledDisplay() {
-
+    m_agsi.Message("ledDisplay\n");
     DWORD segmentOffsetVal;
     DWORD prevVal;
     DWORD mask = (1<<m_ledDisplaySelectLS) | (1<<m_ledDisplaySelectMS);
@@ -132,11 +132,11 @@ void KeilListener::ledDisplay() {
 
     if(m_agsi.ReadSFR(m_port1Addr, &segmentOffsetVal, &prevVal, mask)) {
         digitToTurnOn = segmentOffsetVal;
-
+        m_agsi.Message("digit: %d\n", digitToTurnOn);
         BYTE segmentsValue;
         if(m_agsi.ReadMemory(m_ledDisplayExtAddr, 1, &segmentsValue)) {
             Controller::Simulator::simulator().ledDisplayClean();
-
+            m_agsi.Message("segments: %d\n", segmentsValue);
             auto segments = KeilListener::numberToSegments(segmentsValue);
 
             for(auto& segment: segments) {
