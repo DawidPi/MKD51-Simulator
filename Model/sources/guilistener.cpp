@@ -73,8 +73,9 @@ namespace Model {
     }
 
     void GuiListener::buttons(uint8_t buttons) {
-        buttons |= 0xF0;
-        m_agsi.WriteMemory(m_buttonsExtAddr, 1, &buttons);
+        buttons = ~buttons;
+        m_agsi.Message("buttons: %d\n",buttons);
+        m_agsi.WriteMemory(m_buttonsExtAddr, 1, &(buttons));
         m_agsi.UpdateWindows();
     }
 

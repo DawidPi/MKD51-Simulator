@@ -5,9 +5,6 @@
 
 static AGSIFUNCS m_agsi;
 
-enum class InitStatus{NOT_INITIALIZED, MKD_MONITOR_INITIALIZED,
-                     PERIPHERALS_INITIALIZED};
-
 namespace Model {
 
 bool KeilListener::init(AGSIFUNCS Agsi) {
@@ -31,16 +28,12 @@ void KeilListener::port1Listener() {
 
     DWORD Port1Val, prevVal;
     DWORD mask=0xFF;
-    static InitStatus initialized=NOT_INITIALIZED;
+    static bool initialized=false;
 
     if(m_agsi.ReadSFR(m_port1Addr,&Port1Val, &prevVal, mask)) {
-        if(initialized == NOT_INITIALIZED) {
+        if(!initialized) {
             monitorMKD();
-            initialized = MKD_MONITOR_INITIALIZED;
-        }
-        else if(initialized == MKD_MONITOR_INITIALIZED) {
-            peripheralsStart();
-            initialized = PERIPHERALS_INITIALIZED;
+            initialized = true;
         }
         else {
             buzzer(Port1Val);
@@ -49,7 +42,6 @@ void KeilListener::port1Listener() {
             keyboard(Port1Val);
         }
     }
-
 }
 
 void KeilListener::peripheralsStart() {
@@ -57,7 +49,9 @@ void KeilListener::peripheralsStart() {
 }
 
 void KeilListener::monitorMKD() {
+    uint8_t buttonsInitVal=0xFF;
     m_agsi.WriteSFR(m_port1Addr,0x3C, 0xFF);
+    m_agsi.WriteMemory(m_buttonsExtAddr,1,&buttonsInitVal);
 }
 
 void KeilListener::keyboard(DWORD port1) {

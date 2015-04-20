@@ -30,6 +30,7 @@ namespace Model {
         static const int m_keyboardOutputMSPin=0;
 
         static const int m_diodesExtAddr=0x8008;
+        static const int m_buttonsExtAddr=0x8009;
 
         static const int m_ledDisplayExtAddr=0x8018;
         static const int m_ledDisplaySelectLS=1;
