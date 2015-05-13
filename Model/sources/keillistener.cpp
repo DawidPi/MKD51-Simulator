@@ -14,105 +14,84 @@ bool KeilListener::init(AGSIFUNCS Agsi) {
 
     successfull &= m_agsi.DefineSFR("P1", m_port1Addr,
                                   AGSIBYTE, 0);
-
     successfull &= m_agsi.SetWatchOnSFR(m_port1Addr, port1Listener, AGSIWRITE);
     successfull &= m_agsi.SetWatchOnMemory(m_diodesExtAddr, m_diodesExtAddr+1,
                                          diodes, AGSIWRITE);
     successfull &= m_agsi.SetWatchOnMemory(m_ledDisplayExtAddr, m_ledDisplayExtAddr+1,
                                            ledDisplay, AGSIWRITE);
-
     return successfull;
 }
 
 void KeilListener::port1Listener() {
-
-    DWORD Port1Val, prevVal;
+    enum class Initialization : unsigned char {PREINIT,INIT,FINISHED};
+    DWORD port1Val, prevVal;
     DWORD mask=0xFF;
-    static bool initialized=false;
+    static Initialization initialized=Initialization::PREINIT ;
 
-    if(m_agsi.ReadSFR(m_port1Addr,&Port1Val, &prevVal, mask)) {
-        if(!initialized) {
+    if(m_agsi.ReadSFR(m_port1Addr,&port1Val, &prevVal, mask)) {
+        if(Initialization::FINISHED > initialized) {
             monitorMKD();
-            initialized = true;
+            if(Initialization::PREINIT==initialized)
+                initialized = Initialization::INIT;
+            else
+                initialized = Initialization::FINISHED;
         }
         else {
-            buzzer(Port1Val);
-            diodeL8(Port1Val);
+            buzzer(port1Val);
+            diodeL8(port1Val);
             ledDisplay();
-            keyboard(Port1Val);
+            keyboard(port1Val);
         }
     }
-}
-
-void KeilListener::peripheralsStart() {
-
 }
 
 void KeilListener::monitorMKD() {
     uint8_t buttonsInitVal=0xFF;
-    m_agsi.WriteSFR(m_port1Addr,0x3C, 0xFF);
+    m_agsi.WriteSFR(m_port1Addr, 0x00, 0xFF);
     m_agsi.WriteMemory(m_buttonsExtAddr,1,&buttonsInitVal);
+    m_agsi.UpdateWindows();
 }
 
 void KeilListener::keyboard(DWORD port1) {
-    uint16_t values=Model::GuiListener::keyboardVal();
+    uint16_t values = GuiListener::keyboardVal();
 
-    uint8_t firstRow = 0 | ((values & 0x8000) | ((values & 0x800)<<3) |
-                               ((values & 0x80)<<6) | ((values&8)<<9));
-    uint8_t secondRow =  0 | (((values & 0x4000)<<1) | ((values & 0x400)<<4) |
-                              ((values & 0x40)<<7) | ((values&4)<<10));
-    uint8_t thirdRow =  0 | (((values & 0x2000)<<2) | ((values & 0x200)<<5) |
-                              ((values & 0x20)<<8) | ((values&2)<<11));
-    uint8_t fourthRow =  0 | (((values & 0x1000)<<3) | ((values & 0x100)<<6) |
-                              ((values & 0x10)<<9) | ((values&1)<<12));
-    BYTE result=0;
+    std::array<int, 4> rows= {
+        0 | (((values & 0x1000)<<3) | ((values & 0x100)<<6) |
+                     ((values & 0x10)<<9) | ((values&1)<<12)),
+        0 | (((values & 0x2000)<<2) | ((values & 0x200)<<5) |
+                     ((values & 0x20)<<8) | ((values&2)<<11)),
+        0 | (((values & 0x4000)<<1) | ((values & 0x400)<<4) |
+                     ((values & 0x40)<<7) | ((values&4)<<10)),
+        0 | ((values & 0x8000) | ((values & 0x800)<<3) |
+                     ((values & 0x80)<<6) | ((values&8)<<9))
+    };
+
     DWORD maskedPort = port1 & 0x03;
-
-    // change it for an array
-    switch(maskedPort){
-    case 0:
-        result = firstRow;
-        break;
-    case 1:
-        result = secondRow;
-        break;
-    case 2:
-        result = thirdRow;
-        break;
-    case 3:
-        result=fourthRow;
-        break;
-    default:
-        m_agsi.Message("Ooops executed default in keyboard model\n");
-        break;
-    }
-
-    result >>=2;
+    BYTE result =static_cast<uint8_t>(rows[maskedPort] >> 10);
 
     m_agsi.WriteSFR(m_port1Addr,result,0x3C);
     m_agsi.UpdateWindows();
-
 }
 
 void KeilListener::buzzer(DWORD port1) {
     DWORD mask = 1<<m_buzzerPin;
-    if((port1&mask)==0){
-        Controller::Simulator::simulator().buzzer(false);
+    if(port1&mask){
+        Controller::Simulator::simulator().buzzer(true);
     }
     else
-        Controller::Simulator::simulator().buzzer(true);
+        Controller::Simulator::simulator().buzzer(false);
+    m_agsi.UpdateWindows();
 }
 
 void KeilListener::diodeL8(DWORD port1) {
-
     DWORD mask = 1<<m_diodeL8Pin;
 
-    if((port1&mask)==0) {
-        Controller::Simulator::simulator().diodeL8(false);
+    if(port1&mask) {
+        Controller::Simulator::simulator().diodeL8(true);
     }
     else
-        Controller::Simulator::simulator().diodeL8(true);
-
+        Controller::Simulator::simulator().diodeL8(false);
+    m_agsi.UpdateWindows();
 }
 
 void KeilListener::diodes() {
@@ -124,7 +103,6 @@ void KeilListener::diodes() {
 }
 
 void KeilListener::ledDisplay() {
-    m_agsi.Message("ledDisplay\n");
     DWORD segmentOffsetVal;
     DWORD prevVal;
     DWORD mask = (1<<m_ledDisplaySelectLS) | (1<<m_ledDisplaySelectMS);
@@ -132,11 +110,9 @@ void KeilListener::ledDisplay() {
 
     if(m_agsi.ReadSFR(m_port1Addr, &segmentOffsetVal, &prevVal, mask)) {
         digitToTurnOn = segmentOffsetVal;
-        m_agsi.Message("digit: %d\n", digitToTurnOn);
         BYTE segmentsValue;
         if(m_agsi.ReadMemory(m_ledDisplayExtAddr, 1, &segmentsValue)) {
             Controller::Simulator::simulator().ledDisplayClean();
-            m_agsi.Message("segments: %d\n", segmentsValue);
             auto segments = KeilListener::numberToSegments(segmentsValue);
 
             for(auto& segment: segments) {
@@ -148,7 +124,6 @@ void KeilListener::ledDisplay() {
 }
 
 std::vector<View::SingleDigit::Segment> KeilListener::numberToSegments(BYTE number) {
-
     std::vector<View::SingleDigit::Segment> segments;
 
     for(uint8_t mask=0x01, iteration=0; mask!=0; mask<<=1, iteration++) {
@@ -160,7 +135,6 @@ std::vector<View::SingleDigit::Segment> KeilListener::numberToSegments(BYTE numb
 }
 
 void KeilListener::numberToBinDisp(BYTE number) {
-
     for(DWORD mask = 0x80; mask!=0; mask>>=1) {
         if(number&mask)
             m_agsi.Message("1");

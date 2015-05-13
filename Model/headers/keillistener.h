@@ -5,8 +5,6 @@
 #include "../../View/headers/singledigit.h"
 #include "AGSI_Defs.h"
 
-
-
 namespace Model {
 
     class KeilListener {
@@ -19,7 +17,6 @@ namespace Model {
         static void diodes();
         static void keyboard(DWORD port1);
         static void ledDisplay();
-        static void peripheralsStart();
 
     private:
         static const int m_port1Addr=0x90;

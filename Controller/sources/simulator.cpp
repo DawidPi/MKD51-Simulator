@@ -44,17 +44,17 @@ void Simulator::startGui() {
 
     //outputs
     connect(this,SIGNAL(diodesChange(int,bool)),
-            gui,SLOT(diodesUpdate(int,bool)),Qt::DirectConnection);
+            gui,SLOT(diodesUpdate(int,bool)));
     connect(this,SIGNAL(diodesChange(uint8_t)),
-            gui,SLOT(diodesUpdate(uint8_t)),Qt::DirectConnection);
+            gui,SLOT(diodesUpdate(uint8_t)));
     connect(this,SIGNAL(diodeL8Change(bool)),
-            gui,SLOT(diodeL8Update(bool)), Qt::DirectConnection);
+            gui,SLOT(diodeL8Update(bool)));
     connect(this,SIGNAL(buzzerChange(bool)),
-            gui,SLOT(buzzerUpdate(bool)), Qt::DirectConnection);
+            gui,SLOT(buzzerUpdate(bool)));
     connect(this,SIGNAL(segmentChange(int,
                                       View::SingleDigit::Segment,bool)),
-            gui,SLOT(segmentUpdate(int,View::SingleDigit::Segment,bool)), Qt::DirectConnection);
-    connect(this, SIGNAL(ledDisplayReset()), gui, SLOT(ledDisplayReset()), Qt::DirectConnection);
+            gui,SLOT(segmentUpdate(int,View::SingleDigit::Segment,bool)));
+    connect(this, SIGNAL(ledDisplayReset()), gui, SLOT(ledDisplayReset()));
     connect(this,SIGNAL(closeGui()), gui, SLOT(close()));
     connect(this,SIGNAL(finish()), gui, SLOT(deleteLater()));
     mutex.unlock();
