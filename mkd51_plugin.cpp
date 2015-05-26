@@ -40,8 +40,10 @@ extern "C" DWORD AGSIEXPORT AgsiEntry (DWORD nCode, void *vp) {
       break;
 
     case AGSI_TERMINATE:
+        if(Controller::Simulator::simulator().guiStarted()){
         Controller::Simulator::simulator().finish();
         Controller::Simulator::simulator().thread().join();
+        }
       break;
 
     case AGSI_RESET:
