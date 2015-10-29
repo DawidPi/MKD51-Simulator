@@ -1,5 +1,5 @@
-# MKD51-Simulator
-dll applicatiom for Keil, that simulates MKD51 peripherals
+## MKD51-Simulator
+Please refer to wiki to find out more about Simulator and how to install it.
 
 # Installation: !!UPDATE!!
 Copy all dlls and folders with dlls the Keil_v5/UV4 directory.
