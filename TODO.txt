@@ -1,3 +1,0 @@
--> finish implementing Model(Connector)
--> Model should work even when gui is off.
--> HAVE FUN!
