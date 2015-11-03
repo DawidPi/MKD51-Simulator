@@ -1,20 +1,11 @@
 ## MKD51-Simulator
-Please refer to wiki to find out more about Simulator and how to install it.
+Welcome to the MKD51-Simulator repository.
 
-# Installation: !!UPDATE!!
-Copy all dlls and folders with dlls the Keil_v5/UV4 directory.
-copy MKD51_Plugin.dll to Keil_v5/BIN directory
+Find out more about this project on wiki-page on address: 
+https://github.com/DawidPi/MKD51-Simulator/wiki
 
-In Keil:
-->Options for target
-
-->Debug
-
-->Check Use simulator and Limit Speed to Real-Time
-
-->next to dialog DLL there is a section parameter: (add "-dMKD51_Plugin" <without quotes>)
-
-->launch: (debug mode) peripherals->MKD51
+For installation manual and any explanations please refer to:
+https://github.com/DawidPi/MKD51-Simulator/wiki/Installation-process
 
 Notes:
 Simulator does not work with all possible 8051 uC due to Keil bugs. As far tested only with intel's 8051
